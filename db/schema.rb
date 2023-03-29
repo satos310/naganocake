@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2023_03_27_151315) do
     t.index ["order_id_id"], name: "index_cart_items_on_order_id_id"
   end
 
-  create_table "custemers", force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "last_name", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name_kana", default: "", null: false
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 2023_03_27_151315) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_custemers_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_custemers_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
   create_table "genres", force: :cascade do |t|

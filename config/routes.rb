@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   namespace :admin do
     get 'order_details/update'
   end
@@ -80,11 +82,23 @@ Rails.application.routes.draw do
     get 'homes/top'
     get 'homes/about'
   end
-  devise_for :admins
-  devise_for :custemers
-  
-  get "/admin" => "admin#top", as: "top"
-  
+
+  # devise_for :admins
+  # devise_for :customers
+
+  # 顧客用
+  # URL /customers/sign_in ...
+  devise_for :customers, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admin, controllers: {
+    sessions: "admin/sessions"
+  }
+
   namespace :adomin do
     resources :items
   end
