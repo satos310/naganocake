@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  
 
-
+  devise_for :customers
   namespace :admin do
     get 'order_details/update'
   end
@@ -87,15 +88,15 @@ Rails.application.routes.draw do
   # devise_for :customers
 
   # 顧客用
-  # URL /customers/sign_in ...
-  devise_for :customers, controllers: {
-    registrations: "public/registrations",
-    sessions: 'public/sessions'
-  }
+  # URL /customer/sign_in ...
+  # devise_for :customers, controllers: {
+  #   registrations: "public/registrations",
+  #   sessions: 'public/sessions'
+  # }
 
   # 管理者用
   # URL /admin/sign_in ...
-  devise_for :admin, controllers: {
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 
