@@ -1,106 +1,37 @@
 Rails.application.routes.draw do
-  
 
-  devise_for :customers
-  namespace :admin do
-    get 'order_details/update'
-  end
-  namespace :admin do
-    get 'orders/show'
-    get 'orders/update'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/create'
-    get 'genres/edit'
-    get 'genres/update'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/create'
-    get 'items/show'
-    get 'items/edit'
-    get 'items/update'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :admin do
-    get 'sessions/new'
-    get 'sessions/create'
-    get 'sessions/destroy'
-  end
-  namespace :public do
-    get 'addressess/index'
-    get 'addressess/edit'
-    get 'addressess/create'
-    get 'addressess/update'
-    get 'addressess/destroy'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/complete'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-    get 'cart_items/update'
-    get 'cart_items/destroy'
-    get 'cart_items/destroy_all'
-    get 'cart_items/create'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-    get 'customers/unsubscribe'
-    get 'customers/withdraw'
-  end
-  namespace :public do
-    get 'sessions/new'
-    get 'sessions/create'
-    get 'sessions/destroy'
-  end
-  namespace :public do
-    get 'registrations/new'
-    get 'registrations/create'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
 
-  # devise_for :admins
-  # devise_for :customers
+  devise_for :customers, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
 
-  # 顧客用
-  # URL /customer/sign_in ...
-  # devise_for :customers, controllers: {
-  #   registrations: "public/registrations",
-  #   sessions: 'public/sessions'
-  # }
-
-  # 管理者用
-  # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 
-  namespace :adomin do
-    resources :items
+  namespace :admin do
+    get 'homes/top'
+    resources :orders, only: [:show, :update]
+    get 'order_details/update'
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+
+  end
+
+  scope module: :public do
+    get 'homes/top'
+    get 'homes/about'
+    resources :customers, only: [:show, :edit, :update]
+    get 'customers/unsubscribe'
+    patch 'customers/withdraw'
+    resources :items, only: [:index, :show]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete 'cart_items/destroy_all'
+    resources :orders, only: [:new, :create, :index, :show]
+    post 'orders/confirm'
+    get 'orders/complete'
   end
 end
