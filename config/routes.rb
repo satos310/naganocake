@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :customers, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -33,4 +32,5 @@ Rails.application.routes.draw do
     post 'orders/confirm'
     get 'orders/complete'
   end
+
 end
