@@ -1,48 +1,59 @@
-<!-- admin/商品新規登録ページ -->
+<!-- admin/item 商品新規登録ページ -->
+
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div class="container">
   <div clas="row">
     <h2>商品新規登録</h2>
-    
-    <%= form_with model: @item do |f| %>
+
+    <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
       <table>
         <tr>
           <div class="form-group">
             <th>商品画像</th>
-            <td><%= f.file_field :profile_image, accept: "image/*", class: "form-control-file user-image" %></td>  
+            <td><%= f.file_field :item_image, accept: "image/*", class: "form-control-file user-image" %></td>
           </div>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>商品名</th>
-            <td><%= f.text_field :name, autofocus: true, id:"name", class: 'form-control name' %></td>
+            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %></td>
           </div>
         </tr>
-  
+
         <tr>
           <div class="form-group">
             <th>商品説明</th>
-            <td><%= f.text_area :introduction, id:"introduction", class: 'form-control introduction' %></td>
+            <td><%= f.text_area :introduction, class: 'form-control introduction' %></td>
           </div>
         </tr>
-        
+
         <tr>
           <th>ジャンル</th>
           <td>
+            <!-- create  genre_idの取得時にエラー発生中 -->
             <%= form_with model: @genre do |f| %>
-              <%= f.select :faculty, [["ケーキ", 1], ["クッキー", "2"], ["ねりけし", "3"]], include_blank: "-- 選択して下さい --" %>
+              <!-- <%#= f.collection_select(:genre_id, @genres, :id, :name) %> ←でも同様のエラー発生 -->
+              <%= f.select :genre_id, [["ケーキ", 1], ["クッキー", 2], ["ねりけし", 3]], include_blank: "-- 選択して下さい --" %>
             <% end %>
           </td>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>税抜価格</th>
-            <td><%= f.number_field :price, id:"price", class: 'form-control price' %><span>円</span></%></td>
+            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
           </div>
         </tr>
-        
+
         <tr>
           <th>販売ステータス</th>
           <td>
@@ -56,7 +67,7 @@
           </td>
         </tr>
       </table>
-      
+
       <div class="form-group">
         <%= f.submit "新規登録", class: 'btn btn-secondary' %>
       </div>
