@@ -39,11 +39,8 @@
         <tr>
           <th>ジャンル</th>
           <td>
-            <!-- create  genre_idの取得時にエラー発生中 -->
-            <%= form_with model: @genre do |f| %>
-              <!-- <%#= f.collection_select(:genre_id, @genres, :id, :name) %> ←でも同様のエラー発生 -->
-              <%= f.select :genre_id, [["ケーキ", 1], ["クッキー", 2], ["ねりけし", 3]], include_blank: "-- 選択して下さい --" %>
-            <% end %>
+            <!-- 配列の中身はseeds.rbに入力済 -->
+            <%= f.collection_select(:genre_id, @genres, :id, :name) %>
           </td>
         </tr>
 
