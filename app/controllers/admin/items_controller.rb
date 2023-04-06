@@ -1,8 +1,8 @@
 class Admin::ItemsController < ApplicationController
 
   def index
-    @item = Item.all
-    @items = Item.find(params[:id])
+    @items = Item.all
+    @genres = Genre.all
   end
 
   def new
@@ -33,6 +33,6 @@ class Admin::ItemsController < ApplicationController
 
   def item_params
     # genre_id? or genre_id_id?　どっちか
-    params.require(:item).permit(:genre_id_id, :genre_id, :name, :introduction, :price, :is_active)
+    params.require(:item).permit(:genre_id_id, :genre_id, :name, :introduction, :price, :is_active, :item_image)
   end
 end

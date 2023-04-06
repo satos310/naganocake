@@ -1,6 +1,10 @@
 <!-- admin/item 商品一覧ページ -->
-
-<h1>商品一覧</h1>
+<div>
+  <h1>商品一覧</h1>
+  <%= link_to new_admin_item_path do %>
+    <i class="fal fa-plus-circle"></i>
+  <% end %>
+</div>
 
 <div class="col-md-8 offset-md-1">
   <table class="table table-hover table-inverse">
@@ -15,13 +19,13 @@
     </thead>
 
     <tbody>
-      <% @item.each do |item| %>
+      <% @items.each do |item| %>
         <tr>
-          <td><%= @items %></td>
-          <td><%= link_to @item.name, admin_item_path(item.id) %></td>
-          <td><%= @item.price %></td>
-          <td><%= @item.genre %></td>
-          <td><%= @item.is_active %></td>
+          <td><%= item.id %></td>
+          <td><%= link_to item.name, admin_item_path(item.id) %></td>
+          <td><%= item.price %></td>
+          <td><%= item.genre.name %></td>
+          <td><%= item_status_name(item) %></td>
         </tr>
       <% end %>
     </tbody>

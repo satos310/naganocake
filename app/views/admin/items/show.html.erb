@@ -6,35 +6,35 @@
       <%= image_tag @item.get_item_image(100,100) %>
     </div>
     <div>
-      <div class="table">
+      <table>
         <tr>
           <th>商品名</th>
           <td><%= @item.name %></td>
         </tr>
-        
+
         <tr>
           <th>商品説明</th>
           <td><%= @item.introduction %></td>
         </tr>
-        
+
         <tr>
           <th>ジャンル</th>
-          <td><%= @item.genre %></td>
+          <td><%= @item.genre.name %></td>
         </tr>
-        
+
         <tr>
           <th>税込価格</th><br><span>税抜価格</span>
           <td><%= @item.price %></td>
         </tr>
-        
+
         <tr>
           <th>販売ステータス</th>
-          <td><%= @item.is_active %></td>
+          <td><%= @item.item_status_name(item) %></td>
         </tr>
-        
-      </div>
+
+      </table>
     </div>
-    
+
     <div>
       <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-sm btn-success" %>
     </div>
