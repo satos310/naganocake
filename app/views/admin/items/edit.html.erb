@@ -1,2 +1,71 @@
-<h1>Admin::Items#edit</h1>
-<p>Find me in app/views/admin/items/edit.html.erb</p>
+<!-- admin/items/edit編集 -->
+
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+  <div clas="row">
+    <h2>商品編集</h2>
+    <%= form_with model: @item do |f| %>
+      <table>
+        <tr>
+          <div class="form-group">
+            <th>商品画像</th>
+            <td><%= f.file_field :item_image, accept: "image/*", class: "form-control-file user-image" %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class="form-group">
+            <th>商品名</th>
+            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class="form-group">
+            <th>商品説明</th>
+            <td><%= f.text_area :introduction, class: 'form-control introduction' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <th>ジャンル</th>
+          <td>
+            <!-- 配列の中身はseeds.rbに入力済 -->
+            <%= f.collection_select(:genre_id, Genre.all, :id, :name) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <div class="form-group">
+            <th>税抜価格</th>
+            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+          </div>
+        </tr>
+
+        <tr>
+          <th>販売ステータス</th>
+          <td>
+            <%= form_with model: @item do |f| %>
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      
+      <div class="form-group">
+        <%= f.submit "変更を保存", class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

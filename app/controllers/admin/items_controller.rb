@@ -22,11 +22,20 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
   end
 
   def update
+    if @book.update(book_params)
+      flash[:notice] = "You have update book successfully."
+      redirect_to book_path(@book.id)
+    else
+      #@book = Book.find(params[:id])
+      @user = current_user
+      render :edit
+    end
   end
-
+  
   protect_from_forgery
 
   private
