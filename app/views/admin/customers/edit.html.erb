@@ -1,2 +1,85 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<!-- admin/customer/editページ -->
+
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+  <div clas="row">
+    <h2><span><%= @customer.first_name %></span><span><%= @customer.last_name %></span>会員詳細</h2>
+    <%= form_with model: @customer, url: admin_customer_path(@customer.id) ,  method: :update do |f| %>
+      <table>
+        <tr>
+          <div class="form-group">
+            <th>会員ID</th>
+            <td><%= f.text_field :customer_id, autofocus: true, class: 'form-control name' %></td>
+          </div>
+        </tr>
+        
+        <tr>
+          <div class="form-group">
+            <th>氏名</th>
+            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class="form-group">
+            <th>フリガナ</th>
+            <td><%= f.text_area :introduction, class: 'form-control introduction' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <th>郵便番号</th>
+          <td>
+            <!-- 配列の中身はseeds.rbに入力済 -->
+            <%= f.collection_select(:genre_id, Genre.all, :id, :name) %>
+          </td>
+        </tr>
+
+        <tr>
+          <div class="form-group">
+            <th>住所</th>
+            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+          </div>
+        </tr>
+        
+        <tr>
+          <div class="form-group">
+            <th>電話番号</th>
+            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+          </div>
+        </tr>
+        
+        <tr>
+          <div class="form-group">
+            <th>メールアドレス</th>
+            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+          </div>
+        </tr>
+        
+        <tr>
+          <th>会員ステータス</th>
+          <td>
+            <%= form_with model: @customer do |f| %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, "販売中", {value: :true, style: "display: inline-block;"} %>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      
+      <div class="form-group">
+        <%= f.submit "変更を保存", class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
