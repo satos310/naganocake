@@ -1,4 +1,5 @@
 <!-- admin/items/edit編集 -->
+<!-- 編集ボタン押下 → Routing Error(No routes match [PATCH] "/items/1") -->
 
 <% if @item.errors.any? %>
   <%= @item.errors.count %>errors prohibited this obj from being saved:
@@ -12,7 +13,7 @@
 <div class="container">
   <div clas="row">
     <h2>商品編集</h2>
-    <%= form_with model: @item do |f| %>
+    <%= form_with model: @item, url: admin_item_path(@item.id) ,  method: :update do |f| %>
       <table>
         <tr>
           <div class="form-group">
@@ -42,7 +43,7 @@
             <%= f.collection_select(:genre_id, Genre.all, :id, :name) %>
           </td>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>税抜価格</th>
@@ -62,7 +63,7 @@
           </td>
         </tr>
       </table>
-      
+
       <div class="form-group">
         <%= f.submit "変更を保存", class: 'btn btn-secondary' %>
       </div>

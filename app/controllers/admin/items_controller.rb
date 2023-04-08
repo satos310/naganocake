@@ -26,12 +26,10 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    if @book.update(book_params)
-      flash[:notice] = "You have update book successfully."
-      redirect_to book_path(@book.id)
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to admin_item_path(@item.id)
     else
-      #@book = Book.find(params[:id])
-      @user = current_user
       render :edit
     end
   end

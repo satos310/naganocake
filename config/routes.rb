@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-
+  
   namespace :admin do
     get 'homes/top' => 'homes#top'
     resources :orders, only: [:show, :update]
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
-
+  
   scope module: :public do
     get 'homes/top'
     get 'homes/about'
@@ -32,5 +32,5 @@ Rails.application.routes.draw do
     post 'orders/confirm'
     get 'orders/complete'
   end
-
+  
 end
