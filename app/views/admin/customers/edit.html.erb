@@ -17,50 +17,55 @@
         <tr>
           <div class="form-group">
             <th>会員ID</th>
-            <td><%= f.text_field :customer_id, autofocus: true, class: 'form-control name' %></td>
+            <td><%= f.text_field :customer_id, autofocus: true, class: 'form-control' %></td>
           </div>
         </tr>
         
         <tr>
           <div class="form-group">
             <th>氏名</th>
-            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %></td>
+            <td>
+              <%= f.text_field :first_name, autofocus: true, class: 'form-control first_name' %>
+              <%= f.text_field :last_name, autofocus: true, class: 'form-control last_name' %>
+            </td>
           </div>
         </tr>
 
         <tr>
           <div class="form-group">
             <th>フリガナ</th>
-            <td><%= f.text_area :introduction, class: 'form-control introduction' %></td>
+            <td>
+              <%= f.text_field :first_name_kana, autofocus: true, class: 'form-control first_name_kana' %>
+              <%= f.text_field :last_name_kana, autofocus: true, class: 'form-control last_name_kana' %>
+            </td>
           </div>
         </tr>
 
         <tr>
           <th>郵便番号</th>
           <td>
-            <!-- 配列の中身はseeds.rbに入力済 -->
-            <%= f.collection_select(:genre_id, Genre.all, :id, :name) %>
+            <%= f.number_field :postal_code, class: 'form-control postal_code' %>
           </td>
         </tr>
 
         <tr>
           <div class="form-group">
             <th>住所</th>
-            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+            <td><%= f.number_field :address, class: 'form-control address' %></td>
           </div>
         </tr>
         
         <tr>
           <div class="form-group">
             <th>電話番号</th>
-            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+            <td><%= f.text_field :price, class: 'form-control price' %><span>円</span></%></td>
           </div>
         </tr>
         
         <tr>
           <div class="form-group">
             <th>メールアドレス</th>
-            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+            <td><%= f.text_field :email, class: 'form-control email' %></td>
           </div>
         </tr>
         
@@ -69,9 +74,9 @@
           <td>
             <%= form_with model: @customer do |f| %>
               <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, "販売中", {value: :true, style: "display: inline-block;"} %>
+              <%= f.label :is_deleted, "有効", {value: :true, style: "display: inline-block;"} %>
               <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+              <%= f.label :is_deleted, "退会", {value: :false, style: "display: inline-block;"} %>
             <% end %>
           </td>
         </tr>
