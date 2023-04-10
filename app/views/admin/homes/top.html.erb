@@ -13,13 +13,19 @@
         <!--<th>注文ステータス</th>-->
       </tr>
     </thead>
-
+    
     <tbody>
-      <% (@orders,@order_items).each do |order order_item| %>
+      <% @orders.each do |order| %>
         <tr>
           <td><%= order.crated_at %></td>
-          <td><%= order.name %></td>
-          <td><%= order_item.quantity %></td>
+          <td><%= order.customer %></td>
+          <td>
+            <% order_item_toatl = 0 %>
+            <% order.order_items.each do |order_item| %>
+              order_item_toatl = order_item_toatl + order_item_quantity
+            <% end %>
+            <%= order_item_toatl %>
+          </td>
           <!--<td>< = order_status_name(order) %></td>-->
         </tr>
       <% end %>

@@ -1,2 +1,23 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<!-- customer/topページ -->
+<div>
+  <p>
+    ようこそ、ながのCAKEへ！<br>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員ではない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必要になります。<br>
+  </p>
+
+  <h2>新着商品</h2>
+  <div class="d-flex justify-content-cente">
+    <!-- controllerで記述中 limit(4) → 4件のみitem情報を表示 -->
+    <% @items.each do |item| %>
+      <%= image_tag item.get_item_image(100,100) %>
+      <p><%= item.name %></p>
+      <p><span>￥</span><%= item.price %></p>
+    <% end %>
+  </div>
+
+  <%= link_to "すべての商品を見る", items_path %>
+
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_01_051905) do
+ActiveRecord::Schema.define(version: 2023_04_09_121651) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,37 +110,12 @@ ActiveRecord::Schema.define(version: 2023_04_01_051905) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "oder_items", force: :cascade do |t|
-    t.integer "order_id_id", null: false
-    t.integer "item_id_id", null: false
-    t.integer "price_tax", null: false
-    t.integer "quantity", null: false
-    t.integer "status", default: 0, null: false
+  create_table "order_items", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id_id"], name: "index_oder_items_on_item_id_id"
-    t.index ["order_id_id"], name: "index_oder_items_on_order_id_id"
   end
 
-  create_table "oders", force: :cascade do |t|
-    t.integer "customer_id_id", null: false
-    t.string "postal_code", default: "", null: false
-    t.string "address", default: "", null: false
-    t.string "name", default: "", null: false
-    t.integer "postage", null: false
-    t.integer "total_payment", null: false
-    t.integer "payment_method", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id_id"], name: "index_oders_on_customer_id_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.text "profile_image_url", null: false
+  create_table "orders", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -151,7 +126,4 @@ ActiveRecord::Schema.define(version: 2023_04_01_051905) do
   add_foreign_key "cart_items", "customer_ids"
   add_foreign_key "cart_items", "item_ids"
   add_foreign_key "cart_items", "order_ids"
-  add_foreign_key "oder_items", "item_ids"
-  add_foreign_key "oder_items", "order_ids"
-  add_foreign_key "oders", "customer_ids"
 end
