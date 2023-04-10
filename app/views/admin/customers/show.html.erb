@@ -9,15 +9,15 @@
           <th>会員ID</th>
           <td><%= @customer.id %></td>
         </tr>
-        
+
         <tr>
           <th>氏名</th>
-          <td><%= @customer.first_name %><span> </span><%= @customer.last_name %></td>
+          <td><%= @customer.last_name %><span> </span><%= @customer.first_name %></td>
         </tr>
 
         <tr>
           <th>フリガナ</th>
-          <td><%= @customer.first_name_kana %><span> </span><%= @customer.last_name_kana %></td>
+          <td><%= @customer.last_name_kana %><span> </span><%= @customer.first_name_kana %></td>
         </tr>
 
         <tr>
@@ -46,7 +46,7 @@
         </tr>
       </table>
     </div>
-    
+
     <div>
       <div>
         <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-sm btn-success" %>
