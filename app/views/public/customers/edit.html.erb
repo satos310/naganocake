@@ -1,2 +1,66 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<h3>会員情報編集</h3>
+
+<div class="container">
+  <div class="row">
+    <div>
+      <!-- controller未記述now 2023/04/13　 -->
+      <%= form_with model: @customer do |f| %>
+        <table class="field">
+          <tr>
+            <th>名前</th>
+          </tr>
+          <tr>
+            <td><label>(姓)</label><%= f.text_field :last_name, autofocus: true %></td>
+            <td><label>(名)</label><%= f.text_field :first_name %></td>
+          </tr>
+
+          <tr>
+            <th>フリガナ</th>
+          </tr>
+          <tr>
+            <td><label>(セイ)</label><%= f.text_field :last_name_kana %></td>
+            <td><label>(メイ)</label><%= f.text_field :first_name_kana %></td>
+          </tr>
+
+          <tr>
+            <th>メールアドレス</th>
+          </tr>
+          <tr>
+            <td><%= f.email_field :email, autocomplete: "email" %></td>
+          </tr>
+
+          <tr>
+            <th>郵便番号（ハイフンなし）</th>
+          </tr>
+          <tr>
+            <td><%= f.number_field :postal_code %></td>
+          </tr>
+
+          <tr>
+            <th>パスワード（6文字以上）</th>
+          </tr>
+          <tr>
+            <td>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password" %>
+            </td>
+          </tr>
+
+          <tr>
+            <th>パスワード（確認用）</th>
+          </tr>
+          <tr>
+            <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+          </tr>
+
+          <div class="actions">
+            <td><%= f.submit "編集内容を保存" %></td>
+            <%= link_to "退会する", customers_unsubscribe_path %>
+          </div>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
