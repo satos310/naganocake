@@ -1,14 +1,5 @@
 <!-- admin/customer/editページ -->
 
-<% if @item.errors.any? %>
-  <%= @item.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-    <% @item.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <div class="container">
   <div clas="row">
     <h2><span><%= @customer.first_name %></span><span><%= @customer.last_name %></span>会員詳細</h2>
@@ -17,16 +8,16 @@
         <tr>
           <div class="form-group">
             <th>会員ID</th>
-            <td><%= f.text_field :customer_id, autofocus: true, class: 'form-control' %></td>
+            <td><%= @customer.id %></td>
           </div>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>氏名</th>
             <td>
-              <%= f.text_field :first_name, autofocus: true, class: 'form-control first_name' %>
               <%= f.text_field :last_name, autofocus: true, class: 'form-control last_name' %>
+              <%= f.text_field :first_name, autofocus: true, class: 'form-control first_name' %>
             </td>
           </div>
         </tr>
@@ -35,40 +26,38 @@
           <div class="form-group">
             <th>フリガナ</th>
             <td>
-              <%= f.text_field :first_name_kana, autofocus: true, class: 'form-control first_name_kana' %>
               <%= f.text_field :last_name_kana, autofocus: true, class: 'form-control last_name_kana' %>
+              <%= f.text_field :first_name_kana, autofocus: true, class: 'form-control first_name_kana' %>
             </td>
           </div>
         </tr>
 
         <tr>
           <th>郵便番号</th>
-          <td>
-            <%= f.number_field :postal_code, class: 'form-control postal_code' %>
-          </td>
+          <td><%= f.number_field :postal_code, class: 'form-control postal_code' %></td>
         </tr>
 
         <tr>
           <div class="form-group">
             <th>住所</th>
-            <td><%= f.number_field :address, class: 'form-control address' %></td>
+            <td><%= f.text_field :address, class: 'form-control address' %></td>
           </div>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>電話番号</th>
-            <td><%= f.text_field :price, class: 'form-control price' %><span>円</span></%></td>
+            <td><%= f.number_field :telephone_number, class: 'form-control telephone_number' %></%></td>
           </div>
         </tr>
-        
+
         <tr>
           <div class="form-group">
             <th>メールアドレス</th>
             <td><%= f.text_field :email, class: 'form-control email' %></td>
           </div>
         </tr>
-        
+
         <tr>
           <th>会員ステータス</th>
           <td>
@@ -81,7 +70,7 @@
           </td>
         </tr>
       </table>
-      
+
       <div class="form-group">
         <%= f.submit "変更を保存", class: 'btn btn-secondary' %>
       </div>

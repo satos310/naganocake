@@ -5,7 +5,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     if @customer == current_customer
       render "edit"
     else
@@ -14,7 +14,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     if @customer.update(customer_params)
       redirect_to customer_path(@customer)
     else
@@ -26,7 +26,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @customer.update(is_deleted: true)
     reset_session

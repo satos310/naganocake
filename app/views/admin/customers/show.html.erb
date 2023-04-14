@@ -42,14 +42,15 @@
 
         <tr>
           <th>会員ステータス</th>
-          <td><%= customer_status_name(@customer) %></td>
+          <td><%= customer_status_name(@customer)? '有効' : '退会中' %></td>
         </tr>
+
       </table>
     </div>
 
     <div>
       <div>
-        <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-sm btn-success" %>
+        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-sm btn-success" %>
       </div>
       <div>
         <%= link_to "注文一覧に戻る", admin_homes_top_path, class: "btn btn-sm btn-primary" %>
