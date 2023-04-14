@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'homes/top'
     get 'homes/about'
-    resources :customers, only: [:show, :edit, :update]
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
+    resources :customers, only: [:show, :edit, :update]
     resources :items, only: [:index, :show]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :cart_items, only: [:index, :update, :destroy, :create]

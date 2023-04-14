@@ -26,6 +26,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
+    @customer = Customer.find(params[:id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to homes_top_path
   end
 
   private
