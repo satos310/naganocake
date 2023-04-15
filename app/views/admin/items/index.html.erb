@@ -17,7 +17,7 @@
         <th>ステータス</th>
       </tr>
     </thead>
-    
+
     <tbody>
       <!-- ここで商品を呼び出す -->
       <% @items.each do |item| %>
@@ -31,4 +31,9 @@
       <% end %>
     </tbody>
   </table>
+
+  <div>
+    <%= paginate @items %>
+  </div>
+
 </div>

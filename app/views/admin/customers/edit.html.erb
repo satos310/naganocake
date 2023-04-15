@@ -62,10 +62,10 @@
           <th>会員ステータス</th>
           <td>
             <%= form_with model: @customer do |f| %>
-              <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, "有効", {value: :true, style: "display: inline-block;"} %>
               <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, "退会", {value: :false, style: "display: inline-block;"} %>
+              <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
             <% end %>
           </td>
         </tr>

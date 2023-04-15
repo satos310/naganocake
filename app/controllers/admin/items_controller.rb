@@ -1,7 +1,7 @@
 class Admin::ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page]).per(10)
     @genres = Genre.all
   end
 
@@ -33,7 +33,7 @@ class Admin::ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   protect_from_forgery
 
   private

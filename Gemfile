@@ -64,3 +64,6 @@ gem 'jquery-rails'
 
 # font awesome導入
 gem "font-awesome-rails"
+
+# kaminari（ページネーション）
+gem 'kaminari','~> 1.2.1'
