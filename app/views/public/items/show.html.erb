@@ -1,2 +1,43 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<!-- public/items/showページ -->
+
+<div class="container">
+  <div class="row">
+    <div>
+      <%= image_tag @item.get_item_image(100,100) %>
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+
+        <tr>
+          <th>税込価格</th><br><span>税抜価格</span>
+          <td><%= @item.price %></td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- カート追加 -->
+  <div class="row">
+    <div>
+      <% if @item.is_active == true %>
+        <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true  do |f| %>
+          <%= f.select :quantity, *[1..10], prompt: "個数選択" %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <!--第一引数 → オブジェクト名item_id、第二引数部分 → valueで受け渡す値 @item.id-->
+          <!--cart_item controllerの cart_items.find_by(item_id: に送ることができる-->
+          <%= f.submit "カートに入れる" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

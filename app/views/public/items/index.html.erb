@@ -5,16 +5,18 @@
 
       <div class="d-flex justify-content-cente">
         <% @items.each do |item| %>
-          <%= image_tag item.get_item_image(100,100) %>
-          <p><%= item.name %></p>
-          <p><span>￥</span><%= item.price %></p>
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.get_item_image(100,100) %><br>
+            <%= item.name %><br>
+            <span>￥</span><%= item.price %>
+          <% end %>
         <% end %>
-        
+
         <div>
           <%= paginate @items %>
         </div>
       </div>
-      
+
     </div>
   </row>
 </container>
