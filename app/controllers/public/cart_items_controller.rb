@@ -1,16 +1,23 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @cart_items = current_customer.cart_items.all
     @total = 0
+    @cart_items = current_customer.cart_items.all
   end
 
   def update
   end
 
   def destroy
+    cart_item = current_customer.cart_items
+    cart_item.destroy
+    @cart_items = CartItem.all
+    render 'index'
   end
 
   def destroy_all
+    cart_items = CartItem.all
+    current_customer.cart_items.destroy_all
+    redirect_to '/homes/top'
   end
 
   # カート商品追加
