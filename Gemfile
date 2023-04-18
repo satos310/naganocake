@@ -67,3 +67,9 @@ gem "font-awesome-rails"
 
 # kaminari（ページネーション）
 gem 'kaminari','~> 1.2.1'
+
+# enum導入
+gem "enum_help"
+
+# 日本語化 rails-i18インストール
+gem 'rails-i18n', '~> 6.0'

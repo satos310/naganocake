@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
+    @order = Order.new
+    @customer = Customer.all
   end
 
   def confirm
