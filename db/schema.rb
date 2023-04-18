@@ -108,14 +108,30 @@ ActiveRecord::Schema.define(version: 2023_04_09_121651) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_items", force: :cascade do |t|
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "price_tax", null: false
+    t.integer "quantity", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_order_details_on_item_id"
+    t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "postal_code", default: "", null: false
+    t.string "address", default: "", null: false
+    t.string "name", default: "", null: false
+    t.integer "postage", null: false
+    t.integer "total_payment", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -123,4 +139,7 @@ ActiveRecord::Schema.define(version: 2023_04_09_121651) do
   add_foreign_key "addresses", "customer_ids"
   add_foreign_key "cart_items", "customers"
   add_foreign_key "cart_items", "items"
+  add_foreign_key "order_details", "items"
+  add_foreign_key "order_details", "orders"
+  add_foreign_key "orders", "customers"
 end
