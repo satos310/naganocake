@@ -71,5 +71,8 @@ gem 'kaminari','~> 1.2.1'
 # enum導入
 gem "enum_help"
 
-# 日本語化 rails-i18インストール
+# 日本語化 rails-i18
 gem 'rails-i18n', '~> 6.0'
+
+# pry-byebug（デバッグツール）
+gem 'pry-byebug', group: :development

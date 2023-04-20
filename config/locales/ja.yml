@@ -5,7 +5,6 @@ ja:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
 
-    order:
       status:
         wait_payment: "入金確認待ち"
         payment: "入金確認"
