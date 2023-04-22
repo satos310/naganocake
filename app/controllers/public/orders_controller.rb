@@ -1,8 +1,11 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    if address == 0
+    @address = Address.new
+    if @order.select_address == 0
       @order.address = current_cutomer.addresses.find(params[:address])
+    else
+      @order.address = 
     end
     @customer = Customer.all
   end
