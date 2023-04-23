@@ -3,7 +3,7 @@
   <h2>注文履歴一覧</h2>
 </div>
 
-<div class="col-md-8 offset-md-1">
+<div>
   <table class="table table-hover table-inverse">
     <thead>
       <tr>
@@ -13,22 +13,16 @@
         <!--<th>注文ステータス</th>-->
       </tr>
     </thead>
-    
+
     <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.crated_at %></td>
-          <td><%= order.customer %></td>
-          <td>
-            <% order_item_toatl = 0 %>
-            <% order.order_items.each do |order_item| %>
-              order_item_toatl = order_item_toatl + order_item_quantity
-            <% end %>
-            <%= order_item_toatl %>
-          </td>
+      <tr>
+        <% @orders.each do |order| %>
+          <td><%= order.created_at %></td>
+          <td><%= order.name %></td>
+          <td><%= order.order_detail.quantity %></td>
           <!--<td>< = order_status_name(order) %></td>-->
-        </tr>
-      <% end %>
+        <% end %>
+      </tr>
     </tbody>
   </table>
 </div>

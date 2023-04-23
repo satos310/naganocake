@@ -1,6 +1,6 @@
 <!-- customer/order/show 注文情報確認ページ -->
 
-<div class="container"> 
+<div class="container">
   <div class="row">
     <table>
       <thead>
@@ -13,54 +13,62 @@
         </tr>
       </thead>
       <tbody>
-        <% @total = 0 %>
+        <% @sum = 0 %>
         <% @cart_items.each do |cart_item| %>
           <tr>
             <td><%= cart_item.item.name %></td>
-            <td><%= cart_item.item.with_tax_price %></td>
-            <td>
-              <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch do |f| %>
-                <%= f.select :amount, *[1..10] %>
-                <%= f.submit "変更" %>
-              <% end %>
-            </td>
-            <td><%= cart_item.subtotal %></td>
+            <td><%= cart_item.item.with_tax_price.to_i %></td>
+            <td><%= cart_item.amount.to_i %></td>
+            <td><%= cart_item.subtotal.to_i %></td>
             <!-- to_i => 返り値エラー回避（確実にinteger型に変換） -->
-            <% @total += cart_item.subtotal.to_i %>
-            <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete %></td>
+            <% @sum += cart_item.subtotal.to_i %>
           </tr>
         <% end %>
       </tbody>
     </table>
-      
+
     <table>
       <tr>
         <th>送料</th>
-        <td></td>
+        <td>800</td>
       </tr>
       <tr>
         <th>商品合計</th>
-        <td></td>
+        <td><%= @sum.to_i %></td>
       </tr>
       <tr>
         <th>請求金額</th>
-        <td></td>
+        <td><%= @sum + 800.to_i %></td>
       </tr>
     </table>
   </div>
 
   <div class="row">
     <div>
-      <%= link_to "買い物を続ける", homes_top_path %>
+      <p><label>支払い方法</label></p>
+      <%= @order.payment_method_i18n %>
     </div>
 
-    <table>
-      <th>合計金額</th>
-      <td><%= @total.to_i %></td>
-    </table>
+    <div>
+      <p><label>お届け先</label></p>
+      <!-- ？ ↓ address -> address_displayにまとめたい　↓ -->
+      <%= @order.postal_code %>
+      <%= @order.address %>
+      <%= @order.name %>
+    </div>
   </div>
 
   <div class="row">
-    <%= link_to "情報入力に進む", new_order_path %>
+    <%= form_with model: @order , url: "/orders" , local: true do |f| %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :postage, value: 800 %>
+      <%= f.hidden_field :postal_code, value: @order.postal_code %>
+      <%= f.hidden_field :total_payment, value: @sum + 800 %>
+      <%= f.hidden_field :address, value: @order.address %>
+      <%= f.hidden_field :name, value: @order.name %>
+      <%= f.hidden_field :order_status, value: "wait_payment" %>
+      <%= f.submit "注文を確定する" %>
+    <% end %>
   </div>
 </div>
