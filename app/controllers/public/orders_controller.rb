@@ -49,7 +49,9 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params.[:id])
+    @order = Order.find(params[:id])
+    # SQLを少なく（一括で）発行可　↓
+    # @order_details = OrderDetail.preload(:order)
   end
 
   private
