@@ -45,7 +45,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @order_details = OrderDetails.all
+    @order_details = OrderDetail.all
   end
 
   def show
