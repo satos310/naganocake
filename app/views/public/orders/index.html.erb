@@ -3,30 +3,42 @@
   <h2>注文履歴一覧</h2>
 </div>
 
-<div>
-  <table class="table table-hover table-inverse">
-    <thead>
-      <tr>
-        <th>注文日</th>
-        <th>配送先</th>
-        <th>注文商品</th>
-        <th>支払金額</th>
-        <th>ステータス</th>
-        <th>注文詳細</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @order_details.each do |order_detail| %>
+<div class="conatiner">
+  <div class="row">
+    <table class="table table-hover table-inverse">
+      <thead>
         <tr>
-          <td><%= order_detail.created_at %></td>
-          <td><%= order_detail.order_id %></td>
-          <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.price_tax %></td>
-          <td><%= order_detail.making_status %></td>
-          <td><%= link_to "表示する", order_path(order_detail.order_id) %></td>
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at %></td>
+            <td>
+              <!-- order_displayで１まとめにしたい -->
+              <%= order.postal_code %>
+              <%= order.address %>
+              <%= order.name %>
+            </td>
+            <td>
+              <!-- １つの注文に紐づく、商品情報の配列 -->
+              <% order.order_details.each do |order_details| %>
+                <%= order_details.item.name %>
+              <% end %>
+            </td>
+            <td><%= order.total_payment %></td>
+            <td><%= order.status_i18n %></td>
+            <td><%= link_to "表示する", order_path(order.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

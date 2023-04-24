@@ -10,7 +10,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
     else
       @order.postal_code = params[:order][:postal_code]
       @order.address = params[:order][:address]
@@ -45,10 +45,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @order_details = OrderDetail.all
+    @orders = Order.all
   end
 
   def show
+    @order = Order.find(params.[:id])
   end
 
   private
