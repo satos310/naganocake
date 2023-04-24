@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  root to: 'public/homes#top'
+
   namespace :admin do
     get 'homes/top' => 'homes#top'
     resources :orders, only: [:show, :update]
