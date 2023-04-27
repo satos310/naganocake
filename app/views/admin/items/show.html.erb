@@ -1,43 +1,51 @@
 <!-- admin/cutomers/showページ -->
-<h2>商品詳細</h2>
 
 <div class="container">
   <div class="row">
-    <div>
-      <%= image_tag @item.get_item_image(100,100) %>
-    </div>
-    <div>
-      <table>
-        <tr>
-          <th>商品名</th>
-          <td><%= @item.name %></td>
-        </tr>
-
-        <tr>
-          <th>商品説明</th>
-          <td><%= @item.introduction %></td>
-        </tr>
-
-        <tr>
-          <th>ジャンル</th>
-          <td><%= @item.genre.name %></td>
-        </tr>
-
-        <tr>
-          <th>税込価格</th><br><span>税抜価格</span>
-          <td><%= @item.price %></td>
-        </tr>
-
-        <tr>
-          <th>販売ステータス</th>
-          <td><%= item_status_name(@item) %></td>
-        </tr>
-
-      </table>
-    </div>
+    <h2 class="col-md-3 bg-light text-center my-4">商品詳細</h2>
   </div>
 
-  <div>
-    <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-sm btn-success" %>
+  <div class="row">
+    <div class="col-md-10 mx-auto d-flex">
+      <div class="col-md-4">
+        <%= image_tag @item.get_item_image(100, 100) %>
+      </div>
+      <div class="col-md-8">
+        <table cellspacing="3">
+          <div>
+            <tr>
+              <th>商品名</th>
+              <td><%= @item.name %></td>
+            </tr>
+          </div>
+
+          <tr class="my-2">
+            <th>商品説明</th>
+            <td><%= @item.introduction %></td>
+          </tr>
+
+          <tr>
+            <th>ジャンル</th>
+            <td><%= @item.genre.name %></td>
+          </tr>
+
+          <tr>
+            <th>税込価格<br>(税抜価格)</th>
+            <td><%= @item.with_tax_price %><span>(</span><%= @item.price %><span>)</span><spann> 円</spann></%></td>
+          </tr>
+
+          <tr>
+            <th>販売ステータス</th>
+            <td><%= item_status_name(@item) %></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-3 mx-auto text-center btn-lg mt-2">
+    <%= link_to "編集する", edit_admin_item_path(@item.id), class: "btn btn-success" %>
   </div>
 </div>

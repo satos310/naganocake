@@ -11,28 +11,27 @@
 
 <div class="container">
   <div clas="row">
-    <h2>商品新規登録</h2>
-
+    <h2 class="col-md-3 bg-light text-center my-4">商品新規登録</h2>
     <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
-      <table>
+      <table class="col-md-5 mx-auto">
         <tr>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <th>商品画像</th>
-            <td><%= f.file_field :item_image, accept: "image/*", class: "form-control-file user-image" %></td>
+            <td><%= f.file_field :item_image, accept: "image/*", class: "form-control-file user-image" %>
           </div>
         </tr>
 
         <tr>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <th>商品名</th>
-            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %></td>
+            <td><%= f.text_field :name, autofocus: true, class: 'form-control name' %>
           </div>
         </tr>
 
         <tr>
           <div class="form-group">
             <th>商品説明</th>
-            <td><%= f.text_area :introduction, class: 'form-control introduction' %></td>
+            <td><%= f.text_area :introduction, class: 'form-control introduction' %>
           </div>
         </tr>
 
@@ -47,7 +46,10 @@
         <tr>
           <div class="form-group">
             <th>税抜価格</th>
-            <td><%= f.number_field :price, class: 'form-control price' %><span>円</span></%></td>
+            <td>
+              <%= f.number_field :price, class: 'form-control price' %>
+              <span>円</span></%>
+            </td>
           </div>
         </tr>
 
@@ -63,9 +65,9 @@
           </td>
         </tr>
       </table>
-      
-      <div class="form-group">
-        <%= f.submit "新規登録", class: 'btn btn-secondary' %>
+
+      <div class="form-group col-md-3 mx-auto text-center btn-lg mt-2">
+        <%= f.submit "新規登録", class: 'btn btn-success' %>
       </div>
     <% end %>
   </div>
