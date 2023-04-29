@@ -2,43 +2,37 @@
 
 <div class="container">
   <div class="row">
-    <div>
-      <%= image_tag @item.get_item_image(100,100) %>
-    </div>
-    <div>
-      <table>
-        <tr>
-          <th>商品名</th>
-          <td><%= @item.name %></td>
-        </tr>
-
-        <tr>
-          <th>商品説明</th>
-          <td><%= @item.introduction %></td>
-        </tr>
-
-        <tr>
-          <th>税込価格</th><br><span>税抜価格</span>
-          <td><%= @item.price %></td>
-        </tr>
-
-      </table>
-    </div>
+    <h2 class="col-md-3 bg-light text-center my-4">商品詳細</h2>
   </div>
 
-  <!-- カート追加 -->
   <div class="row">
-    <div>
-      <% if @item.is_active == true %>
-        <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-          <%= f.select :amount, *[1..10], prompt: "個数選択" %>
-          <%= f.hidden_field :item_id, :value => @item.id %>
-          <%= f.hidden_field :customer_id, :value => current_customer.id %>
-          <!--第一引数 → オブジェクト名item_id、第二引数部分 → valueで受け渡す値 @item.id-->
-          <!--cart_item controllerの cart_items.find_by(item_id: に送ることができる-->
-          <%= f.submit "カートに入れる" %>
-        <% end %>
-      <% end %>
+    <div class="col-md-10 coffset-md-1 mx-auto">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <%= image_tag @item.get_item_image(100,100), class: 'col-md-8 mx-auto img-fluid' %>
+        </div>
+
+        <div class="col-md-7 mx-auto">
+          <h4 class="font-weight-bold"><%= @item.name %></h4>
+          <p><%= @item.introduction %></p>
+          <p></p><br>
+          <h4>￥<%= @item.price %><span class="small">（税込）</span>
+          </h4>
+
+        <!-- カート追加 -->
+        <div class="col-md-7">
+          <% if @item.is_active == true %>
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+              <%= f.select :amount, *[1..10], prompt: "個数選択", class: 'col-md-6' %>
+              <%= f.hidden_field :item_id, :value => @item.id %>
+              <%= f.hidden_field :customer_id, :value => current_customer.id %>
+              <!--第一引数 → オブジェクト名item_id、第二引数部分 → valueで受け渡す値 @item.id-->
+              <!--cart_item controllerの cart_items.find_by(item_id: に送ることができる-->
+              <%= f.submit "カートに入れる", class: 'col-md-6 ml-3 btn btn-success' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
