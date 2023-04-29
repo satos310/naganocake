@@ -1,23 +1,36 @@
-<!-- customer/topページ -->
-<div>
-  <p>
-    ようこそ、ながのCAKEへ！<br>
-    このサイトは、ケーキ販売のECサイトになります。<br>
-    会員ではない方も商品の閲覧はできますが、<br>
-    購入には会員登録が必要になります。<br>
-  </p>
-
-  <h2>新着商品</h2>
-  <div class="d-flex justify-content-cente">
-    <!-- controllerで記述中 limit(4) → 4件のみitem情報を表示 -->
-    <% @items.each do |item| %>
-      <%= image_tag item.get_item_image(100,100) %>
-      <p><%= item.name %></p>
-      <p><span>￥</span><%= item.price %></p>
-    <% end %>
+<!-- customer/top カスタマートップページ -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 mx-auto my-5">
+      <p>
+        ようこそ、ながのCAKEへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員ではない方も商品の閲覧はできますが、<br>
+        購入には会員登録が必要になります。<br>
+      </p>
+    </div>
   </div>
 
-  <%= link_to "すべての商品を見る", items_path %>
+  <div class="row">
+    <div class="col-md-8 mb-3 mx-auto">
+      <h3>新着商品</h3>
+    </div>
 
+    <div class="col-md-8 offset-md-2 mb-3">
+      <div class="row">
+        <!-- controllerで記述中 limit(4) → 4件のみitem情報を表示 -->
+        <% @items.each do |item| %>
+          <div class="d-flex flex-column px-5 col-md-3">
+            <%= image_tag item.get_item_image(100,100) %>
+            <p><%= item.name %></p>
+            <p><span>￥</span><%= item.price %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
+    <div class="col-md-10 text-right">
+      <%= link_to "すべての商品を見る >", items_path %>
+    </div>
+  </div>
 </div>

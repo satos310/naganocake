@@ -2,78 +2,86 @@
 
 <div class="container">
   <div clas="row">
-    <h2><span><%= @customer.first_name %></span><span><%= @customer.last_name %></span>会員詳細</h2>
-    <%= form_with model: @customer, url: admin_customer_path(@customer.id) ,  method: :update do |f| %>
-      <table>
-        <tr>
-          <div class="form-group">
-            <th>会員ID</th>
-            <td><%= @customer.id %></td>
-          </div>
-        </tr>
+    <h2 class="col-md-6 bg-light text-center my-3"><span><%= @customer.last_name %></span><span><%= @customer.first_name %></span><span>さんの</span>会員情報編集</h2>
+  </div>
 
-        <tr>
-          <div class="form-group">
-            <th>氏名</th>
+  <div class="row">
+    <div class="col-md-12 my-2">
+      <%= form_with model: @customer, url: admin_customer_path(@customer.id) ,  method: :update do |f| %>
+        <table class="col-md-8 table table-borderless">
+          <tr>
+            <div class="form-group">
+              <th class="col-md-3">会員ID</th>
+              <td class="col-md-7"><%= @customer.id %></td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>氏名</th>
+              <!-- 横並びにしたい -->
+              <td class="d-flex">
+                <%= f.text_field :last_name, autofocus: true, class: 'form-control last_name col-md-6 mr-4' %>
+                <%= f.text_field :first_name, autofocus: true, class: 'form-control first_name col-md-6' %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>フリガナ</th>
+              <td class="d-flex">
+                <%= f.text_field :last_name_kana, autofocus: true, class: 'form-control last_name_kana col-md-6 mr-4' %>
+                <%= f.text_field :first_name_kana, autofocus: true, class: 'form-control first_name_kana col-md-6' %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <th>郵便番号</th>
+            <td><%= f.number_field :postal_code, class: 'form-control postal_code col-md-6' %></td>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <!-- 住所欄を長くする -->
+              <th>住所</th>
+              <td><%= f.text_field :address, class: 'form-control address' %></td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>電話番号</th>
+              <td><%= f.number_field :telephone_number, class: 'form-control telephone_number col-md-6' %></%></td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>メールアドレス</th>
+              <td><%= f.text_field :email, class: 'form-control email col-md-6' %></td>
+            </div>
+          </tr>
+
+          <tr>
+            <th>会員ステータス</th>
             <td>
-              <%= f.text_field :last_name, autofocus: true, class: 'form-control last_name' %>
-              <%= f.text_field :first_name, autofocus: true, class: 'form-control first_name' %>
+              <%= form_with model: @customer do |f| %>
+                <%= f.radio_button :is_deleted, false %>
+                <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+                <%= f.radio_button :is_deleted, true %>
+                <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+              <% end %>
             </td>
-          </div>
-        </tr>
+          </tr>
+        </table>
 
-        <tr>
-          <div class="form-group">
-            <th>フリガナ</th>
-            <td>
-              <%= f.text_field :last_name_kana, autofocus: true, class: 'form-control last_name_kana' %>
-              <%= f.text_field :first_name_kana, autofocus: true, class: 'form-control first_name_kana' %>
-            </td>
-          </div>
-        </tr>
+        <div class="form-group col-md-3 mx-auto mt-4">
+          <%= f.submit "変更を保存", class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
 
-        <tr>
-          <th>郵便番号</th>
-          <td><%= f.number_field :postal_code, class: 'form-control postal_code' %></td>
-        </tr>
-
-        <tr>
-          <div class="form-group">
-            <th>住所</th>
-            <td><%= f.text_field :address, class: 'form-control address' %></td>
-          </div>
-        </tr>
-
-        <tr>
-          <div class="form-group">
-            <th>電話番号</th>
-            <td><%= f.number_field :telephone_number, class: 'form-control telephone_number' %></%></td>
-          </div>
-        </tr>
-
-        <tr>
-          <div class="form-group">
-            <th>メールアドレス</th>
-            <td><%= f.text_field :email, class: 'form-control email' %></td>
-          </div>
-        </tr>
-
-        <tr>
-          <th>会員ステータス</th>
-          <td>
-            <%= form_with model: @customer do |f| %>
-              <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
-              <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
-            <% end %>
-          </td>
-        </tr>
-      </table>
-
-      <div class="form-group">
-        <%= f.submit "変更を保存", class: 'btn btn-secondary' %>
-      </div>
-    <% end %>
   </div>
 </div>

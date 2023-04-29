@@ -1,13 +1,17 @@
 <!-- admin/customer/showページ -->
-<h2><span><%= @customer.first_name %></span><span><%= @customer.last_name %></span>会員詳細</h2>
+
 
 <div class="container">
   <div class="row">
-    <div>
-      <table>
+    <h3 class="col-md-6 bg-light text-center my-3"><span><%= @customer.last_name %></span><span><%= @customer.first_name %></span><span>さんの</span>会員詳細</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 my-3">
+      <table class="table table-borderless">
         <tr>
-          <th>会員ID</th>
-          <td><%= @customer.id %></td>
+          <th class="col-md-3">会員ID</th>
+          <td class="col-md-9"><%= @customer.id %></td>
         </tr>
 
         <tr>
@@ -53,15 +57,17 @@
 
       </table>
     </div>
+  </div>
 
-    <div>
+  <div class="row">
+    <div class="col-md-10 mx-auto my-3 d-flex">
       <div>
-        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-sm btn-success" %>
+        <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-sm btn-success mr-5" %>
       </div>
       <div>
-        <%= link_to "注文一覧に戻る", admin_homes_top_path, class: "btn btn-sm btn-primary" %>
+        <!-- ↓ 未実装（必須実装ページではないため） ↓ -->
+        <%#= link_to "注文履歴一覧を見る", admin_homes_top_path, class: "btn btn-sm btn-primary" %>
       </div>
     </div>
-
   </div>
 </div>
