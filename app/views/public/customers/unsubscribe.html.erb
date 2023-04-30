@@ -1,15 +1,27 @@
 <!-- 退会確認ページ -->
 
-<div>
-  <h3>本当に退会しますか？</h3>
-    <p>
-      退会すると、会員登録情報や<br>
-      これまでの購入履歴が閲覧できなくなります。<br>
-      退会する場合は、「退会する」をクリックしてください。
-    </p>
-
-    <div>
-      <%= link_to "退会しない", customer_path(current_customer) %>
-      <%= link_to "退会する" , customers_withdraw_path, method: :patch %>
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 mx-auto mt-5 mb-3">
+        <p class="text-center font-weight-bold">本当に退会しますか？</p>
+      </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mx-auto text-center mb-3">
+      <p>
+        退会すると、会員登録情報や<br>
+        これまでの購入履歴が閲覧できなくなります。<br>
+        退会する場合は、「退会する」をクリックしてください。
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mx-auto text-center">
+      <%= link_to "退会しない", customer_path(current_customer), class: 'col-md-2 btn btn-primary mr-4' %>
+      <%= link_to "退会する" , customers_withdraw_path, method: :patch, class: 'col-md-2 btn btn-danger' %>
+    </div>
+  </dvi>
 </div>

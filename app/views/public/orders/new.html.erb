@@ -1,4 +1,5 @@
 <!-- customer/order/new 注文情報入力 -->
+
 <div class="container">
   <div class="row">
     <h4 class="col-md-3 text-center bg-light my-4">注文情報入力</h4>
@@ -23,7 +24,7 @@
 
         <div class="mb-3">
           <span class="font-weight-bold">お届け先</span>
-          <div class="d-flex flex-column ml-4">
+          <div class="col-md-12 d-flex flex-column ml-4">
             <!-- ご自身の住所 -->
             <div>
               <%= f.radio_button :select_address, 0 %>ご自身の住所
@@ -42,26 +43,29 @@
 
             <!-- 新しいお届け先 -->
             <div>
-              <%= f.radio_button :select_address, 2 %>新しいお届け先
+              <%= f.radio_button :select_address, 2 %><label>新しいお届け先</label>
             </div>
-            <div class="col-md-12 container-fluid">
-              <table border="0", class="table-borderless">
+            <div class="col-md-10 ml-3">
+              <table border="0", class="table-borderles">
                 <tr>
                   <div class="form-group">
-                    <td class="col-md-4">郵便番号（ハイフンなし）</td>
-                    <td><%= f.number_field :postal_code, class: 'form-control col-md-5' %></td>
+                    <th class="">
+                      <label>郵便番号（ハイフンなし）</label>
+                    </th>
+                    <td><%= f.number_field :postal_code, class: 'form-control col-md-7' %></td>
                   </div>
                 </tr>
+
                 <tr>
                   <div class="form-group">
-                    <td>住所</td>
+                    <th>住所</th>
                     <td><%= f.text_field :address, class: 'form-control col-md-12' %></td>
                   </div>
                 </tr>
                 <tr>
                   <div class="form-group">
-                    <td>宛名</td>
-                    <td><%= f.text_field :name, class: 'form-control col-md-5' %></td>
+                    <th>宛名</th>
+                    <td><%= f.text_field :name, class: 'form-control col-md-7' %></td>
                   </div>
                 </tr>
               </table>

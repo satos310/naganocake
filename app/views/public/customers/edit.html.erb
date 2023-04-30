@@ -1,47 +1,56 @@
-<h3>会員情報編集</h3>
+
 
 <div class="container">
   <div class="row">
-    <div>
-      <!-- controller未記述now 2023/04/13 -->
+    <h3 class="col-md-3 text-center bg-light my-4">会員情報編集</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <%= form_with model: @customer do |f| %>
-        <table class="field">
+        <table class="table table-borderless col-md-8">
           <tr>
-            <th>名前</th>
-            <td><label>(姓)</label><%= f.text_field :last_name, autofocus: true %></td>
-            <td><label>(名)</label><%= f.text_field :first_name %></td>
+            <div class="form-group">
+              <th>名前</th>
+              <td class="d-flex">
+                <%= f.text_field :last_name, autofocus: true, class: 'form-control col-md-4 mr-4' %>
+                <%= f.text_field :first_name, class: 'form-control col-md-4' %>
+              </td>
+            </div>
           </tr>
 
-          <tr>
+          <tr class="form-group">
             <th>フリガナ</th>
-            <td><label>(セイ)</label><%= f.text_field :last_name_kana %></td>
-            <td><label>(メイ)</label><%= f.text_field :first_name_kana %></td>
+            <td class="d-flex">
+              <%= f.text_field :last_name_kana, class: 'form-control col-md-4 mr-4' %>
+              <%= f.text_field :first_name_kana, class: 'form-control col-md-4' %>
+            </td>
           </tr>
 
-          <tr>
-            <th>郵便番号（ハイフンなし）</th>
-            <td><%= f.number_field :postal_code %></td>
+          <tr class="form-group">
+            <th>郵便番号</th>
+            <td><%= f.number_field :postal_code, class: 'form-control col-md-4' %></td>
           </tr>
 
-          </tr>
+          <tr class="form-group">
             <th>住所</th>
-            <td><%= f.text_field :address %></td>
+            <td><%= f.text_field :address, class: 'form-control col-md-10' %></td>
           </tr>
 
-          </tr>
+          <tr class="form-group">
             <th>電話番号</th>
-            <td><%= f.number_field :telephone_number %></td>
+            <td><%= f.number_field :telephone_number, class: 'form-control col-md-4' %></td>
           </tr>
 
-          <tr>
+          <tr class="form-group">
             <th>メールアドレス</th>
-            <td><%= f.email_field :email %></td>
+            <td><%= f.email_field :email, class: 'form-control col-md-4' %></td>
           </tr>
 
           <div class="actions">
-            <td><%= f.submit "編集内容を保存" %></td>
+            <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
             <!-- ↓ unsubscribeのidが見つからない？ ↓ -->
-            <td><%= link_to "退会する", customers_unsubscribe_path %></td>
+            <td><%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger" %></td>
           </div>
         </table>
       <% end %>

@@ -21,7 +21,9 @@
         <!-- controllerで記述中 limit(4) → 4件のみitem情報を表示 -->
         <% @items.each do |item| %>
           <div class="d-flex flex-column px-5 col-md-3">
-            <%= image_tag item.get_item_image(100,100) %>
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.get_item_image(100,100) %>
+            <% end %>
             <p><%= item.name %></p>
             <p><span>￥</span><%= item.price %></p>
           </div>

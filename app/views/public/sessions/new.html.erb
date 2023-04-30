@@ -1,27 +1,37 @@
-<h2>ログイン</h2>
+<!-- customer/sessions/new ログインページ -->
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <table>
-    <h3>会員の方はこちらからログイン</h3>
-    <tr class="field">
-      <th><%= f.label "メールアドレス" %></th>
-      <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
-    </tr>
+<div class="container">
+  <div class="row">
+    <h4 class="col-md-2 text-center bg-light my-4">ログイン</h4>
+  </div>
 
-    <tr class="foeld">
-      <th><%= f.label "パスワード" %></th>
-      <td><%= f.password_field :password, autocomplete: "current-password" %></td>
-    </tr>
+  <div class="row">
+    <div class="col-md-10">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <p class="col-md-4 text-center bg-light my-4 font-weight-bold">会員の方はこちらからログイン</p>
+        <table class="table table-borderless col-md-10 mx-auto">
+          <tr class="field">
+            <th class="col-md-3"><%= f.label "メールアドレス" %></th>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'col-md-7' %></td>
+          </tr>
 
-    <div class="actions">
-      <td><%= f.submit "ログイン" %></td>
+          <tr class="foeld">
+            <th><%= f.label "パスワード" %></th>
+            <td><%= f.password_field :password, autocomplete: "current-password", class: 'col-md-7 mb-3' %></td>
+          </tr>
+        </table>
+
+        <div class="actions col-md-4 mx-auto">
+          <td><%= f.submit "ログイン", class: 'btn btn-primary mb-5' %></td>
+        </div>
+      <% end %>
+
+      <div class="col-md-10 mx-auto">
+        <p class="col-md-4 text-center bg-light my-4 font-weight-bold">会員登録がお済みでない方</p>
+        <p class="ml-5"><%= link_to "こちら", new_customer_registration_path %> からログインしてください</p>
+      </div>
+
+
     </div>
-  </table>
-<% end %>
-
-<div>
-  <h3>会員登録がお済みでない方</h3>
-  <p><%= link_to "こちら", new_customer_registration_path %> からログインしてください</p>
+  </div>
 </div>
-
-<%= render "public/shared/links" %>
